@@ -199,3 +199,23 @@ func TestStats(t *testing.T) {
 		t.Errorf("stats = %+v", st)
 	}
 }
+
+func TestClaimFeedLocksOnlyThatFeed(t *testing.T) {
+	s := open(t)
+	ctx := context.Background()
+	a, _, _ := s.EnsureFeed(ctx, "https://a.example/rss", now)
+	b, _, _ := s.EnsureFeed(ctx, "https://b.example/rss", now)
+	d, ok, err := s.ClaimFeed(ctx, a.ID, now, time.Minute)
+	if err != nil || !ok || d.Feed.ID != a.ID || d.State.LockedUntil == nil {
+		t.Fatalf("claim a: ok=%v d=%+v err=%v", ok, d, err)
+	}
+	if _, ok, _ := s.ClaimFeed(ctx, a.ID, now, time.Minute); ok {
+		t.Error("a should be locked")
+	}
+	if _, ok, _ := s.ClaimFeed(ctx, b.ID, now, time.Minute); !ok {
+		t.Error("b should be claimable")
+	}
+	if _, ok, _ := s.ClaimFeed(ctx, 999, now, time.Minute); ok {
+		t.Error("unknown feed should not claim")
+	}
+}

@@ -272,6 +272,29 @@ func (s *Store) ClaimDue(ctx context.Context, now time.Time, lockFor time.Durati
 	return out, tx.Commit()
 }
 
+// ClaimFeed locks one specific feed if it is not already locked, regardless
+// of whether it is due. Used for on-demand first fetches.
+func (s *Store) ClaimFeed(ctx context.Context, feedID int64, now time.Time, lockFor time.Duration) (Due, bool, error) {
+	res, err := s.db.ExecContext(ctx,
+		`UPDATE fetch_state SET locked_until = ? WHERE feed_id = ? AND (locked_until IS NULL OR locked_until < ?)`,
+		now.Add(lockFor).Unix(), feedID, now.Unix())
+	if err != nil {
+		return Due{}, false, err
+	}
+	if n, _ := res.RowsAffected(); n == 0 {
+		return Due{}, false, nil
+	}
+	f, err := scanFeed(s.db.QueryRowContext(ctx, `SELECT `+feedCols+` FROM feeds WHERE id = ?`, feedID))
+	if err != nil {
+		return Due{}, false, err
+	}
+	st, err := s.FetchState(ctx, feedID)
+	if err != nil {
+		return Due{}, false, err
+	}
+	return Due{Feed: f, State: st}, true, nil
+}
+
 // RecordFetchOK stores validators, schedules the next poll, refreshes feed
 // metadata and tracks quiet polls for adaptive intervals.
 func (s *Store) RecordFetchOK(ctx context.Context, feedID int64, r FetchOK) error {
