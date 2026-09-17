@@ -84,6 +84,6 @@ Dependencies: standard library, `golang.org/x/net/html` (discovery),
 
 ## Deploy
 
-CI pushes `ghcr.io/facorreiaa/feeds:<sha>` on `main`. Set that tag in
+CI pushes `ghcr.io/facorreiaa/fcfeeds:<sha>` on `main`. Set that tag in
 `platform/infra/apps/feeds/values-production.yaml` and merge; ArgoCD rolls
 it. Single replica, `strategy: Recreate` — SQLite has one writer.
