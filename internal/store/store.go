@@ -89,6 +89,7 @@ type Item struct {
 type Stats struct {
 	Feeds        int
 	Due          int
+	Items        int
 	OldestDueAge time.Duration
 }
 
@@ -473,7 +474,36 @@ func (s *Store) Stats(ctx context.Context, now time.Time) (Stats, error) {
 	if oldest.Valid {
 		st.OldestDueAge = now.Sub(time.Unix(oldest.Int64, 0))
 	}
+	if err := s.db.QueryRowContext(ctx, `SELECT COUNT(*) FROM items`).Scan(&st.Items); err != nil {
+		return st, err
+	}
 	return st, nil
+}
+
+// FetchStates loads poller state for many feeds at once, keyed by feed id.
+// Unknown ids are simply absent.
+func (s *Store) FetchStates(ctx context.Context, feedIDs []int64) (map[int64]FetchState, error) {
+	out := map[int64]FetchState{}
+	if len(feedIDs) == 0 {
+		return out, nil
+	}
+	args := make([]any, len(feedIDs))
+	for i, id := range feedIDs {
+		args[i] = id
+	}
+	rows, err := s.db.QueryContext(ctx, `SELECT `+stateCols+` FROM fetch_state WHERE feed_id IN (`+placeholders(len(feedIDs))+`)`, args...)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		st, err := scanState(rows)
+		if err != nil {
+			return nil, err
+		}
+		out[st.FeedID] = st
+	}
+	return out, rows.Err()
 }
 
 // ErrNotFound is returned by lookups that find nothing.

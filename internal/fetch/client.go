@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"strconv"
 	"strings"
 	"time"
@@ -87,6 +88,11 @@ func NewClient(g *Guard, o Options) *Client {
 		},
 	}
 	return c
+}
+
+// CheckURL validates a URL against the client's guard without fetching.
+func (c *Client) CheckURL(ctx context.Context, raw string) (*url.URL, error) {
+	return c.guard.CheckURL(ctx, raw)
 }
 
 // Get performs a guarded conditional GET.

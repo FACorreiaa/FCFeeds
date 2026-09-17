@@ -67,6 +67,12 @@ func New(s *store.Store, c *fetch.Client, cfg Config) *Poller {
 	}
 }
 
+// CheckURL exposes the fetch client's SSRF guard so the API can reject a
+// feed URL up front with the same rules the poller will apply.
+func (p *Poller) CheckURL(ctx context.Context, raw string) (*url.URL, error) {
+	return p.client.CheckURL(ctx, raw)
+}
+
 // Run claims due feeds every tick and fetches them with bounded concurrency
 // until ctx is done. It also runs eviction on its own schedule.
 func (p *Poller) Run(ctx context.Context) {

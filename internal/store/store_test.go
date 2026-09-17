@@ -219,3 +219,19 @@ func TestClaimFeedLocksOnlyThatFeed(t *testing.T) {
 		t.Error("unknown feed should not claim")
 	}
 }
+
+func TestStatsCountsItemsAndFetchStatesBulk(t *testing.T) {
+	s := open(t)
+	ctx := context.Background()
+	a, _, _ := s.EnsureFeed(ctx, "https://a.example/rss", now)
+	b, _, _ := s.EnsureFeed(ctx, "https://b.example/rss", now)
+	_, _ = s.UpsertItems(ctx, a.ID, []Item{{Key: "1", Title: "t", PublishedAt: now}, {Key: "2", Title: "t", PublishedAt: now}}, now)
+	st, _ := s.Stats(ctx, now)
+	if st.Items != 2 {
+		t.Errorf("items = %d", st.Items)
+	}
+	m, err := s.FetchStates(ctx, []int64{a.ID, b.ID, 999})
+	if err != nil || len(m) != 2 || m[a.ID].FeedID != a.ID || m[b.ID].FeedID != b.ID {
+		t.Errorf("states = %+v err=%v", m, err)
+	}
+}
