@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+<channel>
+  <title>"stock market" - Google News</title>
+  <link>https://news.google.com/search?q=stock+market</link>
+  <item>
+    <title>Markets rally as yields fall - CNBC</title>
+    <link>https://news.google.com/rss/articles/CBMi</link>
+    <guid isPermaLink="false">CBMi</guid>
+    <pubDate>Wed, 17 Sep 2026 09:30:00 GMT</pubDate>
+    <source url="https://www.cnbc.com">CNBC</source>
+    <media:thumbnail url="https://img.example/t.png"/>
+  </item>
+</channel>
+</rss>

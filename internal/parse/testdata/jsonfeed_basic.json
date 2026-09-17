@@ -1,0 +1,11 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "JSON Example",
+  "home_page_url": "https://json.example/",
+  "feed_url": "https://json.example/feed.json",
+  "items": [
+    {"id": "1", "url": "https://json.example/1", "title": "First", "date_published": "2026-09-17T08:00:00+02:00", "image": "https://json.example/1.png", "content_html": "<p>drop</p>", "authors": [{"name": "Bo"}]},
+    {"id": "2", "url": "https://json.example/2", "title": "No date"},
+    {"url": "https://json.example/3", "title": "No id uses url"}
+  ]
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="https://blog.example.org/">
+  <title>Example Blog</title>
+  <link rel="alternate" type="text/html" href="https://blog.example.org/"/>
+  <link rel="self" href="https://blog.example.org/atom.xml"/>
+  <updated>2026-09-17T10:00:00Z</updated>
+  <entry>
+    <id>urn:uuid:1</id>
+    <title type="html">Hello &lt;em&gt;world&lt;/em&gt;</title>
+    <link rel="enclosure" href="https://blog.example.org/a.mp3"/>
+    <link rel="alternate" href="/posts/hello"/>
+    <updated>2026-09-17T09:00:00Z</updated>
+    <author><name>Ana</name></author>
+    <content type="html">body dropped</content>
+  </entry>
+  <entry>
+    <id>urn:uuid:2</id>
+    <title>Published wins over updated</title>
+    <link href="https://blog.example.org/posts/two"/>
+    <published>2026-09-10T00:00:00Z</published>
+    <updated>2026-09-16T00:00:00Z</updated>
+  </entry>
+</feed>

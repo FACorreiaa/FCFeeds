@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel>
+  <title>Example Finance</title>
+  <link>https://example.com/</link>
+  <ttl>30</ttl>
+  <item>
+    <title><![CDATA[Fed holds &amp; signals <b>patience</b>]]></title>
+    <link>https://example.com/a?utm_source=rss&amp;id=1#top</link>
+    <guid isPermaLink="false">guid-1</guid>
+    <pubDate>Tue, 16 Sep 2026 14:05:00 GMT</pubDate>
+    <description>Full body must be dropped</description>
+    <content:encoded><![CDATA[<p>long body</p>]]></content:encoded>
+  </item>
+  <item>
+    <title>No guid, no date</title>
+    <link>https://example.com/b</link>
+  </item>
+  <item>
+    <title>   </title>
+    <link>https://example.com/empty-title</link>
+  </item>
+  <item>
+    <title>DC date item</title>
+    <link>https://example.com/c</link>
+    <dc:date>2026-09-15T08:00:00Z</dc:date>
+    <enclosure url="https://example.com/c.jpg" type="image/jpeg" length="1"/>
+  </item>
+</channel>
+</rss>
