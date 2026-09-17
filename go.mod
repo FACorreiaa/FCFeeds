@@ -1,4 +1,4 @@
-module github.com/FACorreiaa/feeds
+module github.com/FACorreiaa/FCFeeds
 
 go 1.26.4
 

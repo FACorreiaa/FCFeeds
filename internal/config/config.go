@@ -26,7 +26,7 @@ func Load(getenv func(string) string) (Config, error) {
 	c := Config{
 		Addr:            ":8080",
 		DBPath:          "/data/feeds.db",
-		UserAgent:       "feeds/1.0 (+https://github.com/FACorreiaa/feeds; shared aggregator)",
+		UserAgent:       "feeds/1.0 (+https://github.com/FACorreiaa/FCFeeds; shared aggregator)",
 		MinPoll:         5 * time.Minute,
 		Workers:         4,
 		MaxBodyBytes:    5 << 20,

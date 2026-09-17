@@ -14,8 +14,8 @@ import (
 
 	"golang.org/x/net/html"
 
-	"github.com/FACorreiaa/feeds/internal/fetch"
-	"github.com/FACorreiaa/feeds/internal/parse"
+	"github.com/FACorreiaa/FCFeeds/internal/fetch"
+	"github.com/FACorreiaa/FCFeeds/internal/parse"
 )
 
 // Candidate is a validated feed URL.

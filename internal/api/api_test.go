@@ -12,11 +12,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/FACorreiaa/feeds/internal/discover"
-	"github.com/FACorreiaa/feeds/internal/fetch/fetchtest"
-	"github.com/FACorreiaa/feeds/internal/metrics"
-	"github.com/FACorreiaa/feeds/internal/poll"
-	"github.com/FACorreiaa/feeds/internal/store"
+	"github.com/FACorreiaa/FCFeeds/internal/discover"
+	"github.com/FACorreiaa/FCFeeds/internal/fetch/fetchtest"
+	"github.com/FACorreiaa/FCFeeds/internal/metrics"
+	"github.com/FACorreiaa/FCFeeds/internal/poll"
+	"github.com/FACorreiaa/FCFeeds/internal/store"
 )
 
 const rssA = `<?xml version="1.0"?><rss version="2.0"><channel><title>Feed A</title><link>https://a.example/</link>

@@ -18,11 +18,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/FACorreiaa/feeds/internal/discover"
-	"github.com/FACorreiaa/feeds/internal/fetch"
-	"github.com/FACorreiaa/feeds/internal/metrics"
-	"github.com/FACorreiaa/feeds/internal/poll"
-	"github.com/FACorreiaa/feeds/internal/store"
+	"github.com/FACorreiaa/FCFeeds/internal/discover"
+	"github.com/FACorreiaa/FCFeeds/internal/fetch"
+	"github.com/FACorreiaa/FCFeeds/internal/metrics"
+	"github.com/FACorreiaa/FCFeeds/internal/poll"
+	"github.com/FACorreiaa/FCFeeds/internal/store"
 )
 
 // Options tunes request handling.

@@ -10,9 +10,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/FACorreiaa/feeds/internal/fetch"
-	"github.com/FACorreiaa/feeds/internal/parse"
-	"github.com/FACorreiaa/feeds/internal/store"
+	"github.com/FACorreiaa/FCFeeds/internal/fetch"
+	"github.com/FACorreiaa/FCFeeds/internal/parse"
+	"github.com/FACorreiaa/FCFeeds/internal/store"
 )
 
 // Result classifies one fetch attempt for metrics.

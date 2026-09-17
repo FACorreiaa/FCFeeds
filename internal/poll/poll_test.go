@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/FACorreiaa/feeds/internal/fetch/fetchtest"
-	"github.com/FACorreiaa/feeds/internal/store"
+	"github.com/FACorreiaa/FCFeeds/internal/fetch/fetchtest"
+	"github.com/FACorreiaa/FCFeeds/internal/store"
 )
 
 var now = time.Date(2026, 9, 17, 12, 0, 0, 0, time.UTC)

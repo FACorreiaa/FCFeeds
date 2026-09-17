@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/FACorreiaa/feeds/internal/fetch"
+	"github.com/FACorreiaa/FCFeeds/internal/fetch"
 )
 
 const rss = `<?xml version="1.0"?><rss version="2.0"><channel><title>Site RSS</title><link>https://s/</link><item><title>x</title><link>https://s/x</link></item></channel></rss>`

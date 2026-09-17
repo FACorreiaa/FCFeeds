@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/FACorreiaa/feeds/internal/fetch"
+	"github.com/FACorreiaa/FCFeeds/internal/fetch"
 )
 
 // NewLoopbackClient returns a client that resolves every hostname to the

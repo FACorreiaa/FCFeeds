@@ -3,7 +3,7 @@ package api
 import (
 	"time"
 
-	"github.com/FACorreiaa/feeds/internal/store"
+	"github.com/FACorreiaa/FCFeeds/internal/store"
 )
 
 const jsonFeedVersion = "https://jsonfeed.org/version/1.1"
