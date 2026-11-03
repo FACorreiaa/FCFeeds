@@ -1,0 +1,30 @@
+name: No committed binaries
+
+# Build output never belongs in git: once pushed, it bloats every clone forever
+# and only a history rewrite removes it. .gitignore covers the known paths
+# (bin/, tmp/, .build/, downloaded tools, `go build` output); this job catches
+# everything else — a renamed output, a `git add -f` — by file content, not name.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  no-binaries:
+    name: No committed binaries
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fail on any tracked executable, object file or library
+        run: |
+          set -euo pipefail
+          hits="$(git ls-files -z | xargs -0 -r file --no-pad \
+            | grep -E ': .*(ELF|Mach-O|PE32|COFF|current ar archive)' || true)"
+          if [ -n "$hits" ]; then
+            echo "::error::Binary files are tracked. Untrack them with 'git rm --cached <path>' and add the path to .gitignore."
+            echo "$hits"
+            exit 1
+          fi
+          echo "No tracked binaries."

@@ -3,3 +3,25 @@
 *.db
 *.db-wal
 *.db-shm
+
+# --- Build output: never commit a binary. ---
+# CI enforces this by file content (.github/workflows/no-binaries.yml); these
+# entries keep the usual outputs from ever being staged.
+bin/
+tmp/
+.build/
+*.exe
+*.test
+*.o
+*.a
+*.so
+*.dylib
+/air
+/FCFeeds
+/feeds
+/golangci-lint
+/main
+/server
+/sqlc
+/tailwindcss
+/templ
