@@ -216,11 +216,13 @@ func TestRunLoopPollsDueFeeds(t *testing.T) {
 		_, _ = w.Write([]byte(rssBody))
 	}))
 	defer srv.Close()
+	// Keep the fixture clock from newPoller. On the wall clock, KeepFor (14d)
+	// pruned rssBody's 2026-09-17 items the moment they were stored, from
+	// 2026-10-01 on. The loop's ticker still runs in real time.
 	p, st := newPoller(t, srv)
-	p.Now = time.Now
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
-	f, _, _ := st.EnsureFeed(ctx, srv.URL+"/rss", time.Now())
+	f, _, _ := st.EnsureFeed(ctx, srv.URL+"/rss", now)
 	go p.Run(ctx)
 	deadline := time.Now().Add(1500 * time.Millisecond)
 	for time.Now().Before(deadline) {

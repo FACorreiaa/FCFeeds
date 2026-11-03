@@ -81,7 +81,13 @@ func newHarness(t *testing.T) *harness {
 	pc.HostGap = 0
 	p := poll.New(st, client, pc)
 	p.Rand = func() float64 { return 0.5 }
+	// The fixture items are dated 2026-09-17. On the wall clock, KeepFor (14d)
+	// pruned every one of them from 2026-10-01 on, so the suite started failing
+	// with no code change. Pin both clocks to just after the newest fixture.
+	fixtureNow := time.Date(2026, 9, 17, 12, 0, 0, 0, time.UTC)
+	p.Now = func() time.Time { return fixtureNow }
 	srv := New(st, p, discover.New(client), metrics.New(), Options{ColdFetchBudget: 2 * time.Second})
+	srv.Now = p.Now
 	return &harness{up: up, store: st, poller: p, api: srv.Handler()}
 }
 
