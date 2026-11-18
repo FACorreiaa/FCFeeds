@@ -9,7 +9,7 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-w -s" -o feeds ./cmd/feeds
 
 # Runtime stage
-FROM alpine:3.21
+FROM alpine:3.24
 RUN apk --no-cache add ca-certificates tzdata \
     && addgroup -S -g 1000 feeds && adduser -S -u 1000 -G feeds -H feeds \
     && mkdir -p /data && chown feeds:feeds /data
