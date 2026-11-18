@@ -1,0 +1,25 @@
+# Dependency update PRs. Weekly, grouped, so they arrive as a few PRs, not dozens.
+version: 2
+updates:
+  - package-ecosystem: gomod
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      go-modules:
+        patterns: ["*"]
+    open-pull-requests-limit: 5
+
+  # Bumps Dockerfile base image tags (and digests, where pinned).
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns: ["*"]
